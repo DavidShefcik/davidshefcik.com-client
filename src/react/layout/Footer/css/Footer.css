@@ -10,11 +10,11 @@
   text-align: center;
 }
 /* Default */
-.default {
-  color: black;
-  background-color: white;
+.default a {
+  color: #111111;
 }
 .default a:hover, .default a:focus {
+  color: black;
   text-decoration: none;
 }
 /* Scrolled */

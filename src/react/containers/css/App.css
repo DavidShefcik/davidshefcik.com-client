@@ -24,8 +24,7 @@ a:hover, a:focus {
   position: left;
 }
 .content {
-  min-height: calc(150vh - 45px);
-  /* min-height: calc(100vh - 50px); */
+  min-height: calc(100vh - 45px);
   width: 100%;
   padding-top: 45px;
 }

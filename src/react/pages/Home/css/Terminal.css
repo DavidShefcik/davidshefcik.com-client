@@ -1,0 +1,44 @@
+/* Container */
+.container {
+  width: 100%;
+  height: calc(100vh - 45px);
+  background-color: black;
+  font-family: "Roboto Mono";
+  color: #20C20E;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  padding: 5px 10px;
+  display: table;
+}
+.terminalContent {
+  display: table-cell;
+  vertical-align: bottom;
+}
+/* Input and output */
+.outputSection {
+  min-height: 2%;
+}
+.inputSection {
+  height: auto;
+  width: 100%;
+}
+.commandInput {
+  width: 100%;
+  word-break: break-all;
+  min-height: 4%;
+  font-family: "Roboto Mono";
+  font-size: 15px;
+  color: #20C20E;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border: 0;
+  background-color: transparent;
+  outline: none;
+  cursor: text;
+}
+.commandInput[placeholder]:empty:before {
+  content: attr(placeholder);
+  color: gray; 
+}
