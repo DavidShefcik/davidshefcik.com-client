@@ -4,53 +4,23 @@
 
 /* Imports */
 // Modules
-import React, { Suspense } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import React from "react";
+import { Provider } from "react-redux";
 
-// Links
-import Links from "../values/Links";
+// Redux
+import { store } from "../../redux/store";
 
-// CSS
-import styles from "./css/App.css";
+// Components
+import Navigation from "./Navigation";
 
 /* Component */
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      pages: []
-    };
-  }
-  componentDidMount() {
-    this.setState({
-      pages: Links
-    });
-  }
   render() {
     return (
       <div>
-        <Router>
-          <Switch>
-            {
-              this.state.pages.map((value, index) => {
-                return (
-                  <Route path={value.path} key={value.name}>
-                    <Suspense fallback={<p>Loading</p>}>
-                      {
-                        React.createElement(value.component)
-                      }
-                    </Suspense>
-                  </Route>
-                );
-              })
-            }
-          </Switch>
-        </Router>
+        <Provider store={store}>
+          <Navigation />
+        </Provider>
       </div>
     );
   }

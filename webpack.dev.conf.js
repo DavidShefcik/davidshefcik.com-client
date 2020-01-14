@@ -21,7 +21,7 @@ module.exports = {
         test: /\.css$/,
         use: [
           "style-loader",
-          "css-loader"
+          "css-loader?modules"
         ]
       },
       {
@@ -48,7 +48,8 @@ module.exports = {
     port: 3000,
     contentBase: path.join(__dirname, "dist"),
     inline: true,
-    overlay: true
+    overlay: true,
+    historyApiFallback: true
   },
   plugins: [
     new HtmlWebpackPlugin({

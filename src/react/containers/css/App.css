@@ -1,3 +1,4 @@
+/* Global rules */
 * {
   padding: 0;
   margin: 0;
@@ -7,4 +8,31 @@ html, body {
   height: 100%;
   background-color: white;
   font: 15px/1.5 "Roboto";
+}
+a {
+  color: #419efc;
+  text-decoration: none;
+}
+a:hover, a:focus {
+  color: #1270cc;
+  text-decoration: underline;
+}
+/* App container */
+.container {
+  transition: 0.15s linear;
+  position: relative;
+  position: left;
+}
+.content {
+  min-height: calc(150vh - 45px);
+  /* min-height: calc(100vh - 50px); */
+  width: 100%;
+  padding-top: 45px;
+}
+/* Animations */
+.visible {
+  transform: translateX(-250px);
+}
+.hidden {
+  transform: translateX(0);
 }

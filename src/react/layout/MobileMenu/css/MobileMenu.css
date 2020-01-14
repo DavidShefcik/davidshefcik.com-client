@@ -1,0 +1,31 @@
+/* Container */
+.container {
+  width: 250px;
+  height: 100vh;
+  position: fixed;
+  right: 0;
+  background-color: #111111;
+  text-align: center;
+  color: white;
+  transition: 0.15s linear;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  padding: 75px 0;
+  font-size: 16px;
+}
+/* Links */
+.container a, .container a:hover, .container a:focus {
+  text-decoration: none;
+  color: white;
+}
+li {
+  padding: 10px 0;
+}
+/* Animations */
+.visible {
+  transform: translateX(0);
+}
+.hidden {
+  transform: translateX(250px);
+}

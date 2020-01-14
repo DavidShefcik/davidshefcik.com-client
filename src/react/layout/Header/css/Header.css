@@ -1,0 +1,91 @@
+/* Header base */
+.header {
+  width: 100%;
+  height: 45px;
+  line-height: 45px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  padding: 0 20px;
+  z-index: 2;
+  transition: 0.15s linear;
+  overflow: hidden;
+  position: fixed;
+}
+/* Default */
+.default {
+  color: black;
+  background-color: white;
+}
+.default a:hover, .default a:focus {
+  text-decoration: none;
+}
+/* Scrolled */
+.scrolled {
+  background-color: black;
+  color: white;
+}
+.scrolled a {
+  color: #20C20E;
+  text-decoration: none;
+  text-shadow: none;
+}
+.scrolled a:hover, .scrolled a:focus {
+  color: #119103;
+  text-decoration: none;
+}
+/* Branding */
+.branding {
+  font-size: 16px;
+  float: left;
+}
+.branding p {
+  display: inline;
+  font-size: 18px;
+}
+.scrolled .branding a, .scrolled .branding a:hover, .scrolled .branding a:focus {
+  color: #20C20E;
+  text-decoration: none;
+}
+.default .branding a, .default .branding a:hover, .default .branding a:focus {
+  color: #000000;
+  text-decoration: none;
+}
+/* Links and Mobile toggle */
+.links, .mobileMenuToggle {
+  float: right;
+  height: 45px;
+}
+.links ul {
+  list-style: none;
+}
+.links li {
+  display: inline;
+  padding: 0 15px;
+}
+.links p {
+  display: inline;
+}
+/* Desktop visibility */
+.desktop {
+  display: inline;
+}
+.mobile {
+  display: none;
+}
+/* Mobile visibility */
+@media screen and (max-width: 768px) {
+  .desktop {
+    display: none;
+  }
+  .mobile {
+    display: inline;
+  }
+}
+/* Animations */
+.visible {
+  transform: translateX(-250px);
+}
+.hidden {
+  transform: translateX(0);
+}

@@ -1,0 +1,49 @@
+/* Header base */
+.footer {
+  width: 100%;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  padding: 2px 0;
+  transition: 0.15s linear;
+  overflow: hidden;
+  text-align: center;
+}
+/* Default */
+.default {
+  color: black;
+  background-color: white;
+}
+.default a:hover, .default a:focus {
+  text-decoration: none;
+}
+/* Scrolled */
+.scrolled {
+  background-color: black;
+  color: white;
+}
+.scrolled a {
+  color: #20C20E;
+  text-decoration: none;
+  text-shadow: none;
+}
+.scrolled a:hover, .scrolled a:focus {
+  color: #119103;
+  text-decoration: none;
+}
+/* Links */
+.footer ul {
+  width: auto;
+}
+.footer li {
+  display: inline;
+  font-size: 25px;
+  padding: 0 7px;
+}
+/* Animations */
+.visible {
+  transform: translateX(-250px);
+}
+.hidden {
+  transform: translateX(0);
+}
