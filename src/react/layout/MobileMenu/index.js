@@ -20,8 +20,20 @@ class MobileMenu extends React.Component {
     super(props);
     this.state = {
       visible: this.props.visible,
+      colorChange: this.props.scrollColorChange,
+      scrolled: false,
       links: Links.slice(1)
     };
+  }
+  componentDidMount() {
+    if(this.state.colorChange) {
+      window.addEventListener("scroll", this.handleScroll);
+    }
+  }
+  componentWillUnmount() {
+    if(this.state.colorChange) {
+      window.removeEventListener("scroll", this.handleScroll);
+    }
   }
   componentDidUpdate(prevProps) {
     if(prevProps.visible != this.props.visible) {
@@ -29,10 +41,41 @@ class MobileMenu extends React.Component {
         visible: this.props.visible
       });
     }
+    if(prevProps.scrollColorChange != this.props.scrollColorChange) {
+      if(this.props.scrollColorChange) {
+        window.addEventListener("scroll", this.handleScroll);
+      } else {
+        window.removeEventListener("scroll", this.handleScroll);
+        this.setState({
+          scrolled: false
+        });
+      }
+      this.setState({
+        scrollColorChange: this.props.scrollColorChange
+      });
+    }
+  }
+  handleScroll = () => {
+    let doc = document.documentElement;
+    let topScroll = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0);
+
+    if(topScroll >= 50) {
+      if(!this.state.scrolled) {
+        this.setState({
+          scrolled: true
+        });
+      }
+    } else {
+      if(this.state.scrolled) {
+        this.setState({
+          scrolled: false
+        });
+      }
+    }
   }
   render() {
     return (
-      <div className={`${styles.container} ${this.state.visible ? styles.visible : styles.hidden}`}>
+      <div className={`${styles.container} ${this.state.colorChange && this.state.scrolled ? styles.scrolled : styles.default} ${this.state.visible ? styles.visible : styles.hidden}`}>
         <ul>
           {
             this.state.links.map((value, index) => {
@@ -54,7 +97,8 @@ class MobileMenu extends React.Component {
 /* Map state to props */
 const mapStateToProps = state => {
   return {
-    visible: state.mobileMenu.visible
+    visible: state.mobileMenu.visible,
+    scrollColorChange: state.scrollColorChange.colorChange
   };
 };
 

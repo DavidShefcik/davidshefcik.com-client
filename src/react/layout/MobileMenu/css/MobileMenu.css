@@ -15,9 +15,13 @@
   font-size: 16px;
 }
 /* Links */
-.container a, .container a:hover, .container a:focus {
+.default a, .default a:hover, .default a:focus {
   text-decoration: none;
   color: white;
+}
+.scrolled a, .scrolled a:hover, .scrolled a:focus {
+  color: #20C20E;
+  text-decoration: none;
 }
 li {
   padding: 10px 0;
