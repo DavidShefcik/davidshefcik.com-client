@@ -16,7 +16,7 @@ import Terminal from "./components/Terminal";
 class HomePage extends React.Component {
   render() {
     return (
-      <div>
+      <div className={styles.homePage}>
         <Terminal />
       </div>
     );

@@ -5,6 +5,7 @@
 /* Modules */
 // Imports
 import React from "react";
+import { Link } from "react-router-dom";
 
 // CSS
 import styles from "../css/Terminal.css";
@@ -12,33 +13,29 @@ import styles from "../css/Terminal.css";
 // Commands
 import CommandList from "./commands/List";
 
+// Links
+import Links from "../../../values/Links";
+
+// Images
+import terminalWelcomeImage from "../../../../public/images/terminal_welcome.png";
+
 /* Component */
 class Terminal extends React.Component {
-  ascii = [
-    "<pre><code>            ____                 _      __       ",
-    "          / __ \ ____ _ _   __ (_)____/ /        ",
-    "         / / / // __ `/| | / // // __  /         ",
-    "        / /_/ // /_/ / | |/ // // /_/ /          ",
-    "      /_____/ \__,_/  |___//_/ \__,_/            ",
-    "                                                 ",
-    "          _____  __           ____       _  __   ",
-    "        / ___/ / /_   ___   / __/_____ (_)/ /__  ",
-    "        \__ \ / __ \ / _ \ / /_ / ___// // //_/  ",
-    "       ___/ // / / //  __// __// /__ / // ,<     ",
-    "      /____//_/ /_/ \___//_/   \___//_//_/|_|    </code></pre>"
-  ]
   constructor(props) {
     super(props);
-    let wrappedAscii = {__html: this.ascii};
     this.state = {
-      output: [
-      ],
-      mobile: false
+      output: [],
+      mobile: false,
+      links: Links.slice(1),
+      about: "My main skills are Node.js and deployment using Amazon Web Services, as I have AWS developer certification. I enjoy learning new things, creating tools that will help make things easier for others, and playing guitar! My resume is available",
+      aboutLink: <Link to="/resume" title="Resume">here</Link>
     };
     this.commandInput = React.createRef();
   }
   componentDidMount() {
-    this.commandInput.current.focus();
+    if(!this.state.mobile) {
+      this.commandInput.current.focus();
+    }
   }
   commandInputKeyPress = (event) => {
     if(event.key.toUpperCase() != "ENTER") {
@@ -74,7 +71,15 @@ class Terminal extends React.Component {
       commandInfo["args"] = commandArgs;
     }
 
-    this.checkCommand(commandInfo);
+    if(commandInfo["cmd"] === "") {
+      let output = this.state.output;
+      output.push("");
+      this.setState({
+        output: output
+      });
+    } else {
+      this.checkCommand(commandInfo);
+    }
     this.commandInput.current.textContent = null;
   }
   checkCommand = (command) => {
@@ -102,9 +107,34 @@ class Terminal extends React.Component {
       <div className={styles.container}>
         <div className={styles.terminalContent} onClick={this.terminalClick}>
           <div className={styles.outputSection}>
+            <img src={terminalWelcomeImage} className={styles.terminalWelcomeImage} alt="" />
+            <p className={styles.title}>Full Stack Website Developer</p>
+            <ul className={styles.links}>
+              {
+                this.state.links.map((value, index) => {
+                  return (
+                    <li key={value.name} className={index % 2 != 0 ? styles.odd : ""}>
+                      <Link to={value.path} title={value.title}>
+                        {value.title}
+                      </Link>
+                    </li>
+                  );
+                })
+              }
+            </ul>
+            <div className={styles.aboutContainer}>
+              <p className={styles.aboutTitle}>About Me</p>
+              <p className={styles.aboutText}>{this.state.about} {this.state.aboutLink}!</p>
+            </div>
             {
               this.state.output.map((value, index) => {
-                return <div key={index + 1}>{value}</div>;
+                return (
+                  <div key={index + 1} className={styles.outputValueContainer}>
+                    <div className={styles.outputValueContent}>
+                      {value}
+                    </div>
+                  </div>
+                );
               })
             }
           </div>
