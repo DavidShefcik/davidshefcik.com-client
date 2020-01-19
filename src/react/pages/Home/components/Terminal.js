@@ -32,11 +32,16 @@ class Terminal extends React.Component {
       aboutLink: <Link to="/resume" title="Resume">here</Link>
     };
     this.commandInput = React.createRef();
+    this.mounted = false;
   }
   componentDidMount() {
     if(!this.state.mobile) {
       this.commandInput.current.focus();
     }
+    this.mounted = true;
+  }
+  componentWillUnmount() {
+    this.mounted = false;
   }
   commandInputKeyPress = (event) => {
     if(event.key.toUpperCase() != "ENTER") {
@@ -124,9 +129,11 @@ class Terminal extends React.Component {
     } else {
       output.push(`Command '${command["cmd"].toLowerCase()}' could not be found.`);
     }
-    this.setState({
-      output: output
-    });
+    if(this.mounted) {
+      this.setState({
+        output: output
+      });
+    }
   }
   render() {
     return (
