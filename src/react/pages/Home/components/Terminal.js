@@ -88,7 +88,7 @@ class Terminal extends React.Component {
     }
     this.commandInput.current.textContent = null;
   }
-  checkCommand = (command) => {
+  checkCommand = async (command) => {
     let getCmd;
     CommandList.forEach(cmd => {
       if(command["cmd"].toUpperCase() === cmd["usage"].toUpperCase() || cmd["alias"] != undefined && cmd["alias"].includes(command["cmd"].toLowerCase())) {
@@ -100,7 +100,12 @@ class Terminal extends React.Component {
     if(getCmd != null) {
       getCmd["args"] = command["args"];
       let cmdResult = getCmd["run"];
-      cmdResult = cmdResult(getCmd).split("\n");
+      try {
+        cmdResult = await cmdResult(getCmd);
+      } catch(error) {
+        cmdResult = "Something happened! Please try again.";
+      }
+      cmdResult = cmdResult.split("\n");
 
       cmdResult.forEach(res => {
         if(res.includes("terminal:")) {

@@ -11,6 +11,7 @@ import {
   Route,
 } from "react-router-dom";
 import { connect } from "react-redux";
+import { ApolloProvider } from "@apollo/react-hooks";
 
 // Links
 import Links from "../values/Links";
@@ -27,6 +28,9 @@ import styles from "./css/App.css";
 import Header from "../layout/Header";
 import MobileMenu from "../layout/MobileMenu";
 import Footer from "../layout/Footer";
+
+// GraphQL
+import client from "../../graphql/client";
 
 // Components
 import Container from "./Container";
@@ -51,40 +55,42 @@ class Navigation extends React.Component {
     return (
       <React.Fragment>
         <Router>
-          <Header />
-          <MobileMenu />
-          <div className={`${styles.container} ${this.state.visible ? styles.visible : styles.hidden}`}>
-            <div className={styles.content}>
-              <Switch>
-                <Container>
-                  <React.Fragment>
-                    {
-                      this.state.pages.map((value, index) => {
-                        return (
-                          <div key={value.name}>
-                            {
-                              !value.path.includes("/#") ? (
-                                <Route exact path={value.path}>
-                                  <Suspense fallback={<p>Loading</p>}>
-                                    {
-                                      React.createElement(value.component)
-                                    }
-                                  </Suspense>
-                                </Route>
-                              ) : (
-                                <span />
-                              )
-                            }
-                          </div>
-                        );
-                      })
-                    }
-                  </React.Fragment>
-                </Container>
-              </Switch>
+          <ApolloProvider client={client}>
+            <Header />
+            <MobileMenu />
+            <div className={`${styles.container} ${this.state.visible ? styles.visible : styles.hidden}`}>
+              <div className={styles.content}>
+                <Switch>
+                  <Container>
+                    <React.Fragment>
+                      {
+                        this.state.pages.map((value, index) => {
+                          return (
+                            <div key={value.name}>
+                              {
+                                !value.path.includes("/#") ? (
+                                  <Route exact path={value.path}>
+                                    <Suspense fallback={<p>Loading</p>}>
+                                      {
+                                        React.createElement(value.component)
+                                      }
+                                    </Suspense>
+                                  </Route>
+                                ) : (
+                                  <span />
+                                )
+                              }
+                            </div>
+                          );
+                        })
+                      }
+                    </React.Fragment>
+                  </Container>
+                </Switch>
+              </div>
             </div>
-          </div>
-          <Footer />
+            <Footer />
+          </ApolloProvider>
         </Router>
       </React.Fragment>
     );
