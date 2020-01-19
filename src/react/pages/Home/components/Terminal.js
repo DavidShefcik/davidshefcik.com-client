@@ -5,7 +5,8 @@
 /* Modules */
 // Imports
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+import propTypes from "prop-types";
 
 // CSS
 import styles from "../css/Terminal.css";
@@ -44,6 +45,11 @@ class Terminal extends React.Component {
       }
     } else {
       event.preventDefault();
+      let output = this.state.output;
+      output.push(this.commandInput.current.textContent);
+      this.setState({
+        output: output
+      });
       this.processCommand(this.commandInput.current.textContent);
     }
   }
@@ -102,6 +108,10 @@ class Terminal extends React.Component {
           if(terminalCommand[terminalCommand.length - 1] === "clear") {
             output = [];
           }
+        } else if(res.includes("url:")) {
+          let url = res.split(":");
+          url = url[url.length - 1];
+          this.props.history.push(url);
         } else {
           output.push(res);
         }
@@ -141,9 +151,7 @@ class Terminal extends React.Component {
               this.state.output.map((value, index) => {
                 return (
                   <div key={index + 1} className={styles.outputValueContainer}>
-                    <div className={styles.outputValueContent}>
-                      {value}
-                    </div>
+                    <div className={styles.outputValueContent} dangerouslySetInnerHTML={{__html: value}} />
                   </div>
                 );
               })
@@ -152,7 +160,7 @@ class Terminal extends React.Component {
           <div className={styles.inputSection}>
             {
               !this.state.mobile ? (
-                <div contentEditable="true" onKeyPress={this.commandInputKeyPress} className={styles.commandInput} ref={this.commandInput} maxLength={10} placeholder="Enter 'help' for a list of commands." />
+                <div contentEditable="true" onKeyPress={this.commandInputKeyPress} className={styles.commandInput} ref={this.commandInput} placeholder="Enter 'help' for a list of commands." />
               ) : (
                 <p>Tap on the terminal for commands</p>
               )
@@ -164,5 +172,12 @@ class Terminal extends React.Component {
   }
 }
 
+/* Prop types */
+Terminal.propTypes = {
+  history: propTypes.shape({
+    push: propTypes.func.isRequired
+  })
+};
+
 /* Export */
-export default Terminal;
+export default withRouter(Terminal);

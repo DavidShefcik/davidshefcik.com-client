@@ -37,7 +37,7 @@ const run = (args) => {
     if(i != cmds.length - 1) {
       endLine = "\n";
     }
-    output += cmds[i]["usage"] + " - " + cmds[i]["description"] + endLine;
+    output += " - " + cmds[i]["usage"] + " = " + cmds[i]["description"] + endLine;
   }
 
   return output;

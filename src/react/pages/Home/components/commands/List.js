@@ -11,6 +11,10 @@ import cd from "./cd";
 import clear from "./clear";
 import about from "./about";
 import echo from "./echo";
+import pages from "./pages";
+import goto from "./goto";
+import projects from "./projects";
+import terminal from "./terminal";
 
 /* Command list */
 const commandList = [
@@ -48,6 +52,26 @@ const commandList = [
     name: "about",
     usage: "about",
     run: about
+  },
+  {
+    name: "pages",
+    usage: "pages",
+    run: pages
+  },
+  {
+    name: "goto",
+    usage: "goto",
+    run: goto
+  },
+  {
+    name: "projects",
+    usage: "projects",
+    run: projects
+  },
+  {
+    name: "terminal",
+    usage: "terminal",
+    run: terminal
   }
 ];
 

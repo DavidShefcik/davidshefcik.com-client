@@ -6,7 +6,7 @@
 const run = (args) => {
   let textToSay = args["args"];
   if(textToSay === undefined) {
-    return "Nothing to echo out.";
+    return "";
   } else {
     let output = "";
 
@@ -14,7 +14,7 @@ const run = (args) => {
       output += text["value"] + " ";
     });
 
-    output = output.replace(/"/g, "").replace(/'/g, "");
+    output = output.replace(/"/g, "").replace(/'/g, "").replace(/:/g, "");
 
     return output;
   }

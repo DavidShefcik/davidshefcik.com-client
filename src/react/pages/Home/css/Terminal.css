@@ -67,12 +67,12 @@
   padding: 2px 10px;
   font-size: 16px;
 }
-.links a, .aboutText a {
+.links a, .aboutText a, .outputValueContent a {
   color: #20C20E;
   text-decoration: underline;
   text-shadow: none;
 }
-.links a:hover, .links a:focus, .aboutText a:hover, .aboutText a:focus {
+.links a:hover, .links a:focus, .aboutText a:hover, .aboutText a:focus, .outputValueContent a:hover, .outputValueContent a:focus {
   color: #119103;
 }
 .odd {
@@ -111,4 +111,5 @@
   word-wrap: break-word;
   width: calc(100vw - 40px);
   height: auto;
+  min-height: 22px;
 }
