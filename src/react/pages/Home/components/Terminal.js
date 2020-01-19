@@ -92,9 +92,20 @@ class Terminal extends React.Component {
 
     let output = this.state.output;
     if(getCmd != null) {
+      getCmd["args"] = command["args"];
       let cmdResult = getCmd["run"];
-      cmdResult = cmdResult(getCmd);
-      output.push(cmdResult);
+      cmdResult = cmdResult(getCmd).split("\n");
+
+      cmdResult.forEach(res => {
+        if(res.includes("terminal:")) {
+          let terminalCommand = res.split(":");
+          if(terminalCommand[terminalCommand.length - 1] === "clear") {
+            output = [];
+          }
+        } else {
+          output.push(res);
+        }
+      });
     } else {
       output.push(`Command '${command["cmd"].toLowerCase()}' could not be found.`);
     }
