@@ -9,6 +9,7 @@
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
+  position: relative;
 }
 .terminalContent {
   position: absolute;
@@ -22,6 +23,7 @@
   overflow: hidden;
 }
 .inputSection {
+  display: block;
   height: auto;
   overflow-y: auto;
   height: 4%;
@@ -81,7 +83,7 @@
 }
 .aboutContainer {
   width: 100%;
-  margin-bottom: 25%;
+  margin-bottom: 30%;
 }
 .aboutTitle, .aboutText {
   display: block;
@@ -104,8 +106,26 @@
     width: 95%;
   }
   .aboutContainer {
-    margin-top: 45px;
+    margin-bottom: 5px;
   }
+  .inputSection {
+    display: none;
+  }
+  .terminalContent {
+    padding: 5px 10px;
+  }
+}
+/* Icon */
+.arrowIcon {
+  font-size: 35px;
+  display: block;
+  padding-top: 10px;
+  margin: auto;
+  cursor: pointer;
+  color: #20C20E;
+}
+.arrowIcon:hover, .arrowIcon:focus {
+  color: #119103;
 }
 .outputValueContent {
   word-wrap: break-word;

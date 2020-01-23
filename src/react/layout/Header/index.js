@@ -62,16 +62,17 @@ class Header extends React.Component {
     let doc = document.documentElement;
     let topScroll = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0);
 
-    if(topScroll >= 50) {
-      if(!this.state.scrolled) {
-        this.setState({
-          scrolled: true
-        });
-      }
-    } else {
+    // If scrolled down 75% of page or less than 50px
+    if((topScroll / doc.clientHeight) * 100 >= 75 || topScroll < 50) {
       if(this.state.scrolled) {
         this.setState({
           scrolled: false
+        });
+      }
+    } else if(topScroll >= 50) {
+      if(!this.state.scrolled) {
+        this.setState({
+          scrolled: true
         });
       }
     }

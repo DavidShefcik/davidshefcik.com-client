@@ -7,6 +7,8 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import propTypes from "prop-types";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleDoubleDown } from "@fortawesome/free-solid-svg-icons";
 
 // CSS
 import styles from "../css/Terminal.css";
@@ -26,7 +28,6 @@ class Terminal extends React.Component {
     super(props);
     this.state = {
       output: [],
-      mobile: false,
       links: Links.slice(1),
       about: "My main skills are Node.js and deployment using Amazon Web Services, as I have AWS developer certification. I enjoy learning new things, creating tools that will help make things easier for others, and playing guitar! My resume is available",
       aboutLink: <Link to="/resume" title="Resume">here</Link>
@@ -35,9 +36,7 @@ class Terminal extends React.Component {
     this.mounted = false;
   }
   componentDidMount() {
-    if(!this.state.mobile) {
-      this.commandInput.current.focus();
-    }
+    this.commandInput.current.focus();
     this.mounted = true;
   }
   componentWillUnmount() {
@@ -59,9 +58,7 @@ class Terminal extends React.Component {
     }
   }
   terminalClick = () => {
-    if(!this.state.mobile) {
-      this.commandInput.current.focus();
-    }
+    this.commandInput.current.focus();
   }
   processCommand = (command) => {
     let commandRan = command.replace(/\s+/g, " ");
@@ -135,6 +132,9 @@ class Terminal extends React.Component {
       });
     }
   }
+  toProjects = () => {
+    this.props.history.push("/#projects");
+  }
   render() {
     return (
       <div className={styles.container}>
@@ -158,6 +158,7 @@ class Terminal extends React.Component {
             <div className={styles.aboutContainer}>
               <p className={styles.aboutTitle}>About Me</p>
               <p className={styles.aboutText}>{this.state.about} {this.state.aboutLink}!</p>
+              <FontAwesomeIcon icon={faAngleDoubleDown} title="Scroll Down" className={styles.arrowIcon} onClick={this.toProjects} />
             </div>
             {
               this.state.output.map((value, index) => {
@@ -170,13 +171,7 @@ class Terminal extends React.Component {
             }
           </div>
           <div className={styles.inputSection}>
-            {
-              !this.state.mobile ? (
-                <div contentEditable="true" onKeyPress={this.commandInputKeyPress} className={styles.commandInput} ref={this.commandInput} placeholder="Enter 'help' for a list of commands." />
-              ) : (
-                <p>Tap on the terminal for commands</p>
-              )
-            }
+            <div contentEditable="true" onKeyPress={this.commandInputKeyPress} className={styles.commandInput} ref={this.commandInput} placeholder="Enter 'help' for a list of commands." />
           </div>
         </div>
       </div>

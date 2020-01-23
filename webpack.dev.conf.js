@@ -49,7 +49,10 @@ module.exports = {
     contentBase: path.join(__dirname, "dist"),
     inline: true,
     overlay: true,
-    historyApiFallback: true
+    historyApiFallback: true,
+    watchOptions: {
+      ignored: /node_modules/
+    }
   },
   plugins: [
     new HtmlWebpackPlugin({

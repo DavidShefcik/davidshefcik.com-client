@@ -1,0 +1,45 @@
+.container {
+  width: 100%;
+  height: calc((100vh - 45px - 41px));
+  display: table;
+  text-align: center;
+}
+.content {
+  display: table-cell;
+  vertical-align: middle;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  padding: 10px;
+}
+.text {
+  font-size: 18px;
+}
+.projectsTitle {
+  text-align: center;
+  padding: 10px 0;
+  font-size: 20px;
+  display: inline-block;
+  margin: auto;
+  width: auto;
+}
+.projectsLine {
+  width: 30%;
+  border-bottom: 0;
+  border-top: 2px solid #1270cc;
+  display: block;
+  margin: auto;
+}
+@media screen and (max-width: 768px) {
+  .projectsLine {
+    width: 65%;
+  }
+}
+.projectList {
+  width: 100%;
+  height: auto;
+  text-align: center;
+}
+.projectList li {
+  display: inline-block;
+}

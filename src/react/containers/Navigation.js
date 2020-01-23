@@ -29,6 +29,8 @@ import Header from "../layout/Header";
 import MobileMenu from "../layout/MobileMenu";
 import Footer from "../layout/Footer";
 
+import MobileModel from "../layout/MobileModal";
+
 // GraphQL
 import client from "../../graphql/client";
 
@@ -56,6 +58,7 @@ class Navigation extends React.Component {
       <React.Fragment>
         <Router>
           <ApolloProvider client={client}>
+            <MobileModel />
             <Header />
             <MobileMenu />
             <div className={`${styles.container} ${this.state.visible ? styles.visible : styles.hidden}`}>
