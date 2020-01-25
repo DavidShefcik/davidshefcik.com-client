@@ -18,15 +18,24 @@ class Modal extends React.Component {
   close = () => {
     this.props.close();
   };
+  modalClick = (event) => {
+    let clickedId = event.target.getAttribute("id");
+
+    if(clickedId === "background") {
+      this.props.close();
+    }
+  }
   render() {
     return (
-      <div className={`${styles.modalContainer} ${this.props.visible ? (styles.visible) : (styles.hidden)}`}>
-        <div className={styles.container}>
-          <p className={styles.closeContainer} onClick={this.close}><span className={styles.close}>&times;</span></p>
-          <div className={styles.content}>
-            <div className={styles.box}>
-              <p className={styles.boxClose} onClick={this.props.close}>&times;</p>
-              <div className={styles.boxContent}>{this.props.children}</div>
+      <div onClick={this.modalClick}>
+        <div className={`${styles.modalContainer} ${this.props.visible ? (styles.visible) : (styles.hidden)}`}>
+          <div className={styles.container}>
+            <p className={styles.closeContainer} onClick={this.close}><span className={styles.close}>&times;</span></p>
+            <div id="background" className={styles.content}>
+              <div className={styles.box}>
+                <p className={styles.boxClose} onClick={this.props.close}>&times;</p>
+                <div className={styles.boxContent}>{this.props.children}</div>
+              </div>
             </div>
           </div>
         </div>

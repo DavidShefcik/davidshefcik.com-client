@@ -21,22 +21,31 @@ class Project extends React.Component {
   projectModal = () => {
     this.props.setProjectModal(this.props.project);
   }
+  buttonAreaClick = (event) => {
+    let clickedId = event.target.getAttribute("id");
+
+    if(clickedId === "button") {
+      this.projectModal();
+    }
+  }
   render() {
     return (
-      <div className={styles.container} title={this.props.project.name.replace(/-/g, " ").toLowerCase()} onClick={this.projectModal}>
-        <p className={styles.name}>
-          { this.props.project.name.replace(/-/g, " ").toLowerCase() }
-        </p>
-        <p className={styles.description}>
-          { this.props.project.description }
-        </p>
-        <div className={styles.buttonArea}>
-          <ul>
-            <li>
-              <Button type="live" url={this.props.project.liveURL} />
+      <div className={styles.container} title={this.props.project.name.replace(/-/g, " ").toLowerCase()}>
+        <div onClick={this.projectModal}>
+          <p className={styles.name}>
+            { this.props.project.name.replace(/-/g, " ").toLowerCase() }
+          </p>
+          <p className={styles.description}>
+            { this.props.project.description }
+          </p>
+        </div>
+        <div className={styles.buttonArea} onClick={this.buttonAreaClick}>
+          <ul id="button">
+            <li id="button">
+              <Button id="button" type="live" url={this.props.project.liveURL} />
             </li>
-            <li>
-              <Button type="repository" url={this.props.project.repositoryURL} />
+            <li id="button">
+              <Button id="button" type="repository" url={this.props.project.repositoryURL} />
             </li>
           </ul>
         </div>
