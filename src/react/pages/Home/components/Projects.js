@@ -31,6 +31,25 @@ const projectsQuery = gql`
 const Projects = () => {
   const { loading, error, data } = useQuery(projectsQuery);
 
+  if(loading) {
+    return (
+      <div className={styles.container}>
+        <div className={styles.content}>
+          <p className={styles.projectsTitle}>Loading...</p>
+        </div>
+      </div>
+    );
+  }
+  if(error) {
+    return (
+      <div className={styles.container}>
+        <div className={styles.content}>
+          <p className={styles.projectsTitle}>Something happened. Please try again.</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.content}>

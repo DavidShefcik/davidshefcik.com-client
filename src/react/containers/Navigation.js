@@ -28,8 +28,7 @@ import styles from "./css/App.css";
 import Header from "../layout/Header";
 import MobileMenu from "../layout/MobileMenu";
 import Footer from "../layout/Footer";
-
-import MobileModel from "../layout/MobileModal";
+import ProjectModal from "../modals/ProjectModal";
 
 // GraphQL
 import client from "../../graphql/client";
@@ -43,8 +42,33 @@ class Navigation extends React.Component {
     super(props);
     this.state = {
       pages: Links,
-      visible: this.props.visible
+      visible: this.props.visible,
+      projectVisible: this.props.projectVisible
     };
+    this.navDiv = React.createRef();
+  }
+  componentDidMount() {
+    if(this.state.projectVisible) {
+      this.addScrollFreeze();
+    }
+  }
+  componentWillUnmount() {
+    if(this.state.projectVisible) {
+      this.removeScrollFreeze();
+    }
+  }
+  addScrollFreeze = () => {
+    let navDir = this.navDiv.current;
+    let scrollY = window.scrollY;
+    navDir.style.position = "fixed";
+    navDir.style.top = `-${scrollY}px`;
+  }
+  removeScrollFreeze = () => {
+    let navDir = this.navDiv.current;
+    let scroll = navDir.style.top.replace(/-/g, "").replace("px", "");
+    navDir.style.position = "";
+    navDir.style.top = "";
+    window.scrollTo(0, parseInt(scroll));
   }
   componentDidUpdate(prevProps) {
     if(prevProps.visible != this.props.visible) {
@@ -52,16 +76,27 @@ class Navigation extends React.Component {
         visible: this.props.visible
       });
     }
+    if(prevProps.projectVisible != this.props.projectVisible) {
+      if(this.props.projectVisible) {
+        this.addScrollFreeze();
+      } else {
+        this.removeScrollFreeze();
+      }
+
+      this.setState({
+        projectVisible: this.props.projectVisible
+      });
+    }
   }
   render() {
     return (
-      <React.Fragment>
+      <div>
         <Router>
           <ApolloProvider client={client}>
-            <MobileModel />
+            <ProjectModal project={this.props.project} />
             <Header />
             <MobileMenu />
-            <div className={`${styles.container} ${this.state.visible ? styles.visible : styles.hidden}`}>
+            <div ref={this.navDiv} className={`${styles.container} ${this.state.visible ? styles.visible : styles.hidden}`}>
               <div className={styles.content}>
                 <Switch>
                   <Container>
@@ -95,7 +130,7 @@ class Navigation extends React.Component {
             <Footer />
           </ApolloProvider>
         </Router>
-      </React.Fragment>
+      </div>
     );
   }
 }
@@ -103,7 +138,9 @@ class Navigation extends React.Component {
 /* Map state to props */
 const mapStateToProps = state => {
   return {
-    visible: state.mobileMenu.visible
+    visible: state.mobileMenu.visible,
+    projectVisible: state.projectModal.visible,
+    project: state.projectModal.project
   };
 };
 

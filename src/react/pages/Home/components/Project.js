@@ -5,6 +5,10 @@
 /* Imports */
 // Modules
 import React from "react";
+import { connect } from "react-redux";
+
+// Redux
+import { setProjectModal } from "../../../../redux/actions/projectModal";
 
 // CSS
 import styles from "../css/Project.css";
@@ -14,9 +18,12 @@ import Button from "../components/Button";
 
 /* Component */
 class Project extends React.Component {
+  projectModal = () => {
+    this.props.setProjectModal(this.props.project);
+  }
   render() {
     return (
-      <div className={styles.container} title={this.props.project.name.replace(/-/g, " ").toLowerCase()}>
+      <div className={styles.container} title={this.props.project.name.replace(/-/g, " ").toLowerCase()} onClick={this.projectModal}>
         <p className={styles.name}>
           { this.props.project.name.replace(/-/g, " ").toLowerCase() }
         </p>
@@ -39,4 +46,4 @@ class Project extends React.Component {
 }
 
 /* Export */
-export default Project;
+export default connect(null, { setProjectModal })(Project);

@@ -9,9 +9,11 @@ import { combineReducers } from "redux";
 // Reducers
 import mobileMenu from "./mobileMenu";
 import scrollColorChange from "./scrollColorChange";
+import projectModal from "./projectModal";
 
 /* Combine */
 export default combineReducers({
   mobileMenu: mobileMenu,
-  scrollColorChange: scrollColorChange
+  scrollColorChange: scrollColorChange,
+  projectModal: projectModal
 });
