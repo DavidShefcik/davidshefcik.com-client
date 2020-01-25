@@ -18,6 +18,7 @@ class HomePage extends React.Component {
   render() {
     return (
       <div className={styles.homePage}>
+        <Terminal />
         <div id="projects">
           <Projects />
         </div>

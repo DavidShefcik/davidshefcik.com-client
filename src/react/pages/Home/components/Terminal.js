@@ -33,14 +33,22 @@ class Terminal extends React.Component {
       aboutLink: <Link to="/resume" title="Resume">here</Link>
     };
     this.commandInput = React.createRef();
+    this.terminalContainer = React.createRef();
     this.mounted = false;
   }
   componentDidMount() {
     this.commandInput.current.focus();
     this.mounted = true;
+
+    window.addEventListener("resize", this.terminalHeight);    
   }
   componentWillUnmount() {
     this.mounted = false;
+    window.removeEventListener("resize", this.terminalHeight);
+  }
+  terminalHeight = () => {
+    let vh = window.innerHeight * 0.01;
+    this.terminalContainer.current.style.setProperty("--vh", `${vh}px`);
   }
   commandInputKeyPress = (event) => {
     if(event.key.toUpperCase() != "ENTER") {
@@ -137,28 +145,30 @@ class Terminal extends React.Component {
   }
   render() {
     return (
-      <div className={styles.container}>
+      <div className={styles.container} ref={this.terminalContainer}>
         <div className={styles.terminalContent} onClick={this.terminalClick}>
           <div className={styles.outputSection}>
-            <img src={terminalWelcomeImage} className={styles.terminalWelcomeImage} alt="" />
-            <p className={styles.title}>Full Stack Website Developer</p>
-            <ul className={styles.links}>
-              {
-                this.state.links.map((value, index) => {
-                  return (
-                    <li key={value.name} className={index % 2 != 0 ? styles.odd : ""}>
-                      <Link to={value.path} title={value.title}>
-                        {value.title}
-                      </Link>
-                    </li>
-                  );
-                })
-              }
-            </ul>
-            <div className={styles.aboutContainer}>
-              <p className={styles.aboutTitle}>About Me</p>
-              <p className={styles.aboutText}>{this.state.about} {this.state.aboutLink}!</p>
-              <FontAwesomeIcon icon={faAngleDoubleDown} title="Scroll Down" className={styles.arrowIcon} onClick={this.toProjects} />
+            <div className={styles.initialContainer}>
+              <div className={styles.initialContent}>
+                <img src={terminalWelcomeImage} className={styles.terminalWelcomeImage} alt="" />
+                <p className={styles.title}>Full Stack Website Developer</p>
+                <ul className={styles.links}>
+                  {
+                    this.state.links.map((value, index) => {
+                      return (
+                        <li key={value.name} className={index % 2 != 0 ? styles.odd : ""}>
+                          <Link to={value.path} title={value.title}>
+                            {value.title}
+                          </Link>
+                        </li>
+                      );
+                    })
+                  }
+                </ul>
+                <p className={styles.aboutTitle}>About Me</p>
+                <p className={styles.aboutText}>{this.state.about} {this.state.aboutLink}!</p>
+                <FontAwesomeIcon icon={faAngleDoubleDown} title="Scroll Down" className={styles.arrowIcon} onClick={this.toProjects} />
+              </div>
             </div>
             {
               this.state.output.map((value, index) => {

@@ -17,9 +17,21 @@
   bottom: 0;
   padding: 15px 10px;
 }
+@media screen and (max-width: 768px) {
+  .container {
+    display: table;
+    height: calc((var(--vh, 1vh) * 100) - 45px);
+  }
+  .terminalContent {
+    position: relative;
+    display: table-cell;
+    vertical-align: middle;
+  }
+}
 /* Input and output */
 .outputSection {
   width: 100%;
+  height: calc(100vh - 45px);
   overflow: hidden;
 }
 .inputSection {
@@ -27,6 +39,7 @@
   height: auto;
   overflow-y: auto;
   height: 4%;
+  line-height: 30px;
   width: 100%;
 }
 .commandInput {
@@ -53,6 +66,28 @@
   width: 225px;
   display: block;
   margin: auto;
+}
+@media screen and (max-width: 768px) {
+  .outputSection {
+    height: calc(100vh - 45px);
+    height: calc((var(--vh, 1vh) * 100) - 45px);
+  }
+  .terminalWelcomeImage {
+    display: none;
+  }
+}
+.initialContainer {
+  height: 100%;
+  display: table;
+}
+.initialContent {
+  display: table-cell;
+  vertical-align: middle;
+}
+@media screen and (max-width: 768px) {
+  .initialContent {
+    vertical-align: top;
+  }
 }
 .title {
   width: 100%;
@@ -83,7 +118,6 @@
 }
 .aboutContainer {
   width: 100%;
-  margin-bottom: 30%;
 }
 .aboutTitle, .aboutText {
   display: block;
