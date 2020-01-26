@@ -30,13 +30,17 @@ class Terminal extends React.Component {
       output: [],
       links: Links.slice(1),
       about: "My main skills are Node.js and deployment using Amazon Web Services, as I have AWS developer certification. I enjoy learning new things, creating tools that will help make things easier for others, and playing guitar! My resume is available",
-      aboutLink: <Link to="/resume" title="Resume">here</Link>
+      aboutLink: <Link to="/resume" title="Resume">here</Link>,
+      screenWidth: window.innerWidth
     };
     this.commandInput = React.createRef();
     this.terminalContainer = React.createRef();
     this.mounted = false;
   }
   componentDidMount() {
+    let vh = window.innerHeight * 0.01;
+    this.terminalContainer.current.style.setProperty("--vh", `${vh}px`);
+    
     this.commandInput.current.focus();
     this.mounted = true;
 
@@ -47,8 +51,13 @@ class Terminal extends React.Component {
     window.removeEventListener("resize", this.terminalHeight);
   }
   terminalHeight = () => {
-    let vh = window.innerHeight * 0.01;
-    this.terminalContainer.current.style.setProperty("--vh", `${vh}px`);
+    if(this.state.screenWidth != window.innerWidth) {
+      let vh = window.innerHeight * 0.01;
+      this.terminalContainer.current.style.setProperty("--vh", `${vh}px`);
+      this.setState({
+        screenWidth: window.width
+      });
+    }
   }
   commandInputKeyPress = (event) => {
     if(event.key.toUpperCase() != "ENTER") {
@@ -64,9 +73,6 @@ class Terminal extends React.Component {
       });
       this.processCommand(this.commandInput.current.textContent);
     }
-  }
-  terminalClick = () => {
-    this.commandInput.current.focus();
   }
   processCommand = (command) => {
     let commandRan = command.replace(/\s+/g, " ");
@@ -146,43 +152,41 @@ class Terminal extends React.Component {
   render() {
     return (
       <div className={styles.container} ref={this.terminalContainer}>
-        <div className={styles.terminalContent} onClick={this.terminalClick}>
-          <div className={styles.outputSection}>
-            <div className={styles.initialContainer}>
-              <div className={styles.initialContent}>
-                <img src={terminalWelcomeImage} className={styles.terminalWelcomeImage} alt="" />
-                <p className={styles.title}>Full Stack Website Developer</p>
-                <ul className={styles.links}>
-                  {
-                    this.state.links.map((value, index) => {
-                      return (
-                        <li key={value.name} className={index % 2 != 0 ? styles.odd : ""}>
-                          <Link to={value.path} title={value.title}>
-                            {value.title}
-                          </Link>
-                        </li>
-                      );
-                    })
-                  }
-                </ul>
-                <p className={styles.aboutTitle}>About Me</p>
-                <p className={styles.aboutText}>{this.state.about} {this.state.aboutLink}!</p>
-                <FontAwesomeIcon icon={faAngleDoubleDown} title="Scroll Down" className={styles.arrowIcon} onClick={this.toProjects} />
-              </div>
+        <div className={styles.outputSection}>
+          <div className={styles.initialContainer}>
+            <div className={styles.initialContent}>
+              <img src={terminalWelcomeImage} className={styles.terminalWelcomeImage} alt="" />
+              <p className={styles.title}>Full Stack Website Developer</p>
+              <ul className={styles.links}>
+                {
+                  this.state.links.map((value, index) => {
+                    return (
+                      <li key={value.name} className={index % 2 != 0 ? styles.odd : ""}>
+                        <Link to={value.path} title={value.title}>
+                          {value.title}
+                        </Link>
+                      </li>
+                    );
+                  })
+                }
+              </ul>
+              <p className={styles.aboutTitle}>About Me</p>
+              <p className={styles.aboutText}>{this.state.about} {this.state.aboutLink}!</p>
+              <FontAwesomeIcon id="down" icon={faAngleDoubleDown} title="Scroll Down" className={styles.arrowIcon} onClick={this.toProjects} />
             </div>
-            {
-              this.state.output.map((value, index) => {
-                return (
-                  <div key={index + 1} className={styles.outputValueContainer}>
-                    <div className={styles.outputValueContent} dangerouslySetInnerHTML={{__html: value}} />
-                  </div>
-                );
-              })
-            }
           </div>
-          <div className={styles.inputSection}>
-            <div contentEditable="true" onKeyPress={this.commandInputKeyPress} className={styles.commandInput} ref={this.commandInput} placeholder="Enter 'help' for a list of commands." />
-          </div>
+          {
+            this.state.output.map((value, index) => {
+              return (
+                <div key={index + 1} className={styles.outputValueContainer}>
+                  <div className={styles.outputValueContent} dangerouslySetInnerHTML={{__html: value}} />
+                </div>
+              );
+            })
+          }
+        </div>
+        <div className={styles.inputSection}>
+          <div contentEditable="true" onKeyPress={this.commandInputKeyPress} className={styles.commandInput} ref={this.commandInput} placeholder="Enter 'help' for a list of commands." />
         </div>
       </div>
     );

@@ -2,53 +2,51 @@
 .container {
   width: 100%;
   height: calc(100vh - 45px);
+  height: calc((var(--vh, 1vh) * 100) - 45px);
   overflow: hidden;
   background-color: black;
   font-family: "Roboto Mono";
   color: #20C20E;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  position: relative;
 }
-.terminalContent {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  padding: 15px 10px;
+.container a {
+  color: #20C20E;
+  text-decoration: underline;
+  text-shadow: none;
 }
-@media screen and (max-width: 768px) {
-  .container {
-    display: table;
-    height: calc((var(--vh, 1vh) * 100) - 45px);
-  }
-  .terminalContent {
-    position: relative;
-    display: table-cell;
-    vertical-align: middle;
-  }
+.container a:focus, .container a:hover {
+  color: #119103;
 }
-/* Input and output */
+/* Ouput */
 .outputSection {
   width: 100%;
-  height: calc(100vh - 45px);
-  overflow: hidden;
+  height: 95%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
+/* Input */
 .inputSection {
-  display: block;
-  height: auto;
-  overflow-y: auto;
-  height: 4%;
-  line-height: 30px;
   width: 100%;
+  height: 5%;
+  display: block;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+@media screen and (max-width: 768px) {
+  .inputSection {
+    display: none;
+  }
 }
 .commandInput {
   width: 100%;
   word-break: break-all;
   height: 100%;
+  overflow-y: auto;
   font-family: "Roboto Mono";
   font-size: 15px;
   color: #20C20E;
+  padding-left: 15px;
+  padding-right: 15px;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -61,40 +59,36 @@
   content: attr(placeholder);
   color: gray; 
 }
-/* Output items */
-.terminalWelcomeImage {
-  width: 225px;
-  display: block;
-  margin: auto;
-}
-@media screen and (max-width: 768px) {
-  .outputSection {
-    height: calc(100vh - 45px);
-    height: calc((var(--vh, 1vh) * 100) - 45px);
-  }
-  .terminalWelcomeImage {
-    display: none;
-  }
-}
+/* Iniital */
 .initialContainer {
+  width: 100%;
   height: 100%;
-  display: table;
-}
-.initialContent {
-  display: table-cell;
-  vertical-align: middle;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 @media screen and (max-width: 768px) {
-  .initialContent {
-    vertical-align: top;
+  .initialContainer {
+    justify-content: end;
   }
 }
-.title {
-  width: 100%;
-  text-align: center;
-  margin: 25px auto;
-  font-size: 20px;
+/* Welcome */
+.terminalWelcomeImage {
+  width: auto;
+  height: 25%;
 }
+@media screen and (max-width: 768px) {
+  .terminalWelcomeImage {
+    height: 15%;
+  }
+}
+/* Title */
+.title {
+  font-size: 20px;
+  margin: 25px auto;
+}
+/* Links */
 .links {
   width: 100%;
   text-align: center;
@@ -104,66 +98,44 @@
   padding: 2px 10px;
   font-size: 16px;
 }
-.links a, .aboutText a, .outputValueContent a {
-  color: #20C20E;
-  text-decoration: underline;
-  text-shadow: none;
-}
-.links a:hover, .links a:focus, .aboutText a:hover, .aboutText a:focus, .outputValueContent a:hover, .outputValueContent a:focus {
-  color: #119103;
-}
 .odd {
   border-left: 1px solid #119103;
   border-right: 1px solid #119103;
 }
-.aboutContainer {
-  width: 100%;
-}
-.aboutTitle, .aboutText {
-  display: block;
-  width: 60%;
-  height: auto;
-  word-wrap: break-word;
-  margin: auto;
-  text-align: center;
-}
+/* About */
 .aboutTitle {
   font-size: 20px;
-  margin-top: 25px;
-}
-.aboutText {
-  font-size: 16px;
   margin: 25px auto;
 }
-@media screen and (max-width: 768px) {
-  .aboutTitle, .aboutText {
-    width: 95%;
-  }
-  .aboutContainer {
-    margin-bottom: 5px;
-  }
-  .inputSection {
-    display: none;
-  }
-  .terminalContent {
-    padding: 5px 10px;
-  }
+.aboutText {
+  width: 100%;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  padding: 0 30px;
 }
-/* Icon */
+/* Arrow */
 .arrowIcon {
   font-size: 35px;
   display: block;
-  padding-top: 10px;
-  margin: auto;
+  margin: 25px auto;
   cursor: pointer;
   color: #20C20E;
 }
 .arrowIcon:hover, .arrowIcon:focus {
   color: #119103;
 }
+/* Command ouput */
+.outputValueContainer {
+  width: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
 .outputValueContent {
   word-wrap: break-word;
-  width: calc(100vw - 40px);
   height: auto;
   min-height: 22px;
 }
