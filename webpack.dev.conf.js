@@ -6,6 +6,7 @@
 // Modules
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const Dotenv = require("dotenv-webpack");
 
 /* Configuration */
 module.exports = {
@@ -59,6 +60,7 @@ module.exports = {
       template: "./src/public/index.html",
       filename: "index.html",
       inject: "body"
-    })
+    }),
+    new Dotenv()
   ]
 };

@@ -35,6 +35,3 @@ a:hover, a:focus {
 .visible {
   transform: translateX(-250px);
 }
-.hidden {
-  transform: translateX(0);
-}

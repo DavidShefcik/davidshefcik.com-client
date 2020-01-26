@@ -39,7 +39,6 @@ const run = async (args) => {
 
       resolve(output);
     }).catch(error => {
-      console.log(error);
       reject("Could not complete query.");
     });
   });
