@@ -6,7 +6,7 @@ phases:
       nodejs: 10
     commands:
       - echo "Installing node.js."
-      - npm install
+      - npm install --only=production
   pre_build:
     commands:
       - echo "In the pre build phase."
@@ -18,3 +18,8 @@ phases:
   post_build:
     commands:
       - echo "In the post build phase."
+artifacts:
+  files:
+    - dist*/**
+  discard-paths: yes
+  name: dist
