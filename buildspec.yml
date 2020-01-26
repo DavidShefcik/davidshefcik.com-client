@@ -1,0 +1,19 @@
+version: 0.1
+
+phases:
+  intall:
+    runtime-versions:
+      nodejs: 8.10.0
+    commands:
+      - echo "Installing node.js."
+  pre_build:
+    commands:
+      - echo "In the pre build phase."
+  build:
+    commands:
+      - echo "Starting build."
+      - npm run build
+      - echo "Done with build."
+  post_build:
+    commands:
+      - echo "In the post build phase."
