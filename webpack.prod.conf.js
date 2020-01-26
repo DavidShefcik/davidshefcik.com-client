@@ -4,37 +4,28 @@
 
 /* Imports */
 // Modules
-const TerserJSPlugin = require("terser-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const path = require("path");
+const webpack = require("webpack");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 /* Config */
+const VENDOR_LIBS = ["react", "redux", "react-redux", "react-dom", "redux-thunk"];
+
 module.exports = {
   mode: "production",
-  optimization: {
-    minimizer: [new UglifyJsPlugin({cache: true, parallel: true, sourceMap: true}), new OptimizeCSSAssetsPlugin({})],
+  entry: {
+    bundle: path.resolve(__dirname, "src") + "/index.js",
+    vendor: VENDOR_LIBS
   },
   output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js",
-    publicPath: "/"
-  },
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: "[name].css",
-      chunkFilename: "[id].css",
-    }),
-  ],
-  resolve: {
-    extensions: ["*", ".js", ".jsx"]
+    path: path.join(__dirname, "dist"),
+    filename: "[name].[chunkhash].js"
   },
   module: {
     rules: [
       {
-        test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader"],
+        use: ["style-loader", "css-loader?modules"],
+        test: /\.css$/
       },
       {
         test: /\.(png|jpe?g|gif)$/i,
@@ -44,12 +35,38 @@ module.exports = {
         ]
       },
       {
+        use: "babel-loader",
         test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: {
-          loader: "babel-loader"
-        }
+        exclude: /node_modules/
       }
-    ],
-  }
+    ]
+  },
+  resolve: {
+    extensions: ["*", ".js", ".jsx"]
+  },
+  optimization: {
+    splitChunks: {
+      chunks: "all",
+      maxInitialRequests: Infinity,
+      minSize: 0,
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name(module) {
+            const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+
+            return `npm.${packageName.replace("@", "")}`;
+          },
+        },
+      }
+    }
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "./src/public/index.html"
+    }),
+    new webpack.DefinePlugin({
+      "process.env.NODE_ENV": JSON.stringify("production")
+    })
+  ]
 };
