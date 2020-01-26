@@ -23,7 +23,14 @@ class Container extends React.Component {
     if(prevProps.location != this.props.location) {
       this.props.toggleMenu(false);
       this.checkColorChange();
-      window.scrollTo(0, 0);
+
+      if(this.props.location.hash === "#projects") {
+        document.getElementById("projects").scrollIntoView({
+          behavior: "smooth"
+        });
+      } else {
+        window.scrollTo(0, 0);
+      }
     }
   }
   checkColorChange = () => {
