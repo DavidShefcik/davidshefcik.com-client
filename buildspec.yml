@@ -20,6 +20,6 @@ phases:
       - echo "In the post build phase."
 artifacts:
   files:
-    - dist*/**
+    - "dist/**/*"
   discard-paths: yes
   name: dist
