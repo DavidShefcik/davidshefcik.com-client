@@ -57,7 +57,7 @@ class ContactPage extends React.Component {
   }
   render() {
     return (
-      <div className={styles.page}>
+      <div>
         <PageTitle title="Contact Me" />
         <Box>
           <div className={styles.captcha}>

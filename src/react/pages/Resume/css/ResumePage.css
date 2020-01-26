@@ -1,0 +1,44 @@
+.resume {
+  width: 100%;
+  text-align: left;
+}
+.name {
+  font-size: 20px;
+  font-weight: 300;
+  margin-bottom: 5px;
+}
+.resumeContent {
+  padding-left: 20px;
+  padding-right: 20px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+.section {
+  width: 100%;
+  margin: 10px 0;
+}
+.sectionTitle {
+  font-size: 18px;
+  color: #f75d5d;
+  font-weight: bold;
+}
+.list {
+  width: 100%;
+  margin: auto 20px;
+}
+.note {
+  font-size: 14px;
+  color: gray;
+  margin: 5px auto;
+}
+.title {
+  font-size: 16px;
+  font-style: italic;
+}
+.bold {
+  font-weight: bold;
+}
+.text {
+  margin: 8px auto;
+}
