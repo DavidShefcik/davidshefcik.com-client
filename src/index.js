@@ -2,8 +2,6 @@
 * David Shefcik 2020
 */
 
-// TEMP
-
 /* Imports */
 // Modules
 import React from "react";
