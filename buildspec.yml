@@ -18,11 +18,9 @@ phases:
   post_build:
     commands:
       - echo "In the post build phase."
-      - ls
-      - pwd
       
 artifacts:
   files:
     - "dist/**/*"
-  discard-paths: yes
+  discard-paths: no
   name: dist
