@@ -22,6 +22,8 @@ phases:
   post_build:
     commands:
       - echo "In the post build phase."
+      - pwd
+      - ls
       
 artifacts:
   files:
