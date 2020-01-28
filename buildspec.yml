@@ -2,7 +2,7 @@ version: 0.2
 
 env:
   parameter-store:
-    RECAPTCHA_SITE_KEY: davidshefcikcom-client-recaptcha-key
+    RECAPTCHA_SITE_KEY: "davidshefcikcom-client-recaptcha-key"
 
 phases:
   install:
