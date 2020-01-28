@@ -22,7 +22,6 @@ phases:
   post_build:
     commands:
       - echo "In the post build phase."
-      - echo $RECAPTCHA_SITE_KEY
       
 artifacts:
   files:
