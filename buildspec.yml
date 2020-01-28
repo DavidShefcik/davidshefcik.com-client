@@ -18,7 +18,15 @@ phases:
     commands:
       - echo "Starting build."
       - npm run build
-      - echo "Done with build."
+      - echo "Done with build. Removing old package.json."
+      - rm -rf package.json
+      - rm -rf package-lock.json
+      - rm -rf node_modules
+      - echo "npm init."
+      - npm init -y
+      - echo "Installing express"
+      - npm install express
+      - echo "Done with installing. Moving on."
   post_build:
     commands:
       - echo "In the post build phase."
