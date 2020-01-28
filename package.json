@@ -33,6 +33,7 @@
     "@fortawesome/react-fontawesome": "^0.1.8",
     "apollo-boost": "^0.4.7",
     "aws-param-store": "^3.2.0",
+    "aws-sdk": "^2.610.0",
     "axios": "^0.19.2",
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
