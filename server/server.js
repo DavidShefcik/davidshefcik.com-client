@@ -16,6 +16,7 @@ app.use(express.static(path.join(__dirname, "./dist")));
 
 // Catch all
 app.get("/*", (req, res) => {
+  // Return file
   return res.sendFile(path.join(__dirname, "./dist/index.html"), (error) => {
     return res.status(500).send("Something happened!");
   });
