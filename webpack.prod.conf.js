@@ -7,6 +7,7 @@
 const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const Dotenv = require("dotenv-webpack");
 
 /* Config */
 const VENDOR_LIBS = ["react", "redux", "react-redux", "react-dom", "redux-thunk"];
@@ -68,6 +69,7 @@ module.exports = {
     new webpack.DefinePlugin({
       "process.env.NODE_ENV": JSON.stringify("production"),
       "process.env.RECAPTCHA_SITE_KEY": JSON.stringify(process.env.RECAPTCHA_SITE_KEY)
-    })
+    }),
+    new Dotenv()
   ]
 };
