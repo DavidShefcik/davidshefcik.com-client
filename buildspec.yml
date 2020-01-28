@@ -27,4 +27,5 @@ artifacts:
   files:
     - "dist/**/*"
     - ".ebextensions/**/*"
+    - "server/**/*"
   discard-paths: no
