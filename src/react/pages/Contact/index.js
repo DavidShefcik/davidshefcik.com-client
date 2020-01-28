@@ -28,7 +28,6 @@ class ContactPage extends React.Component {
     this.captcha = React.createRef();
   }
   submit = () => {
-    console.log("process: " + JSON.parse(JSON.stringify(process.env)));
     console.log("env: " + process.env.RECAPTCHA_SITE_KEY);
     this.captcha.current.execute().then(r => {
       this.setState({
