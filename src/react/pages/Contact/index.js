@@ -7,7 +7,6 @@
 import React from "react";
 import Recaptcha from "reaptcha";
 import axios from "axios";
-import awsParamStore from "aws-param-store";
 
 // Components
 import PageTitle from "../../layout/PageTitle"; 
@@ -29,20 +28,12 @@ class ContactPage extends React.Component {
     this.captcha = React.createRef();
   }
   submit = () => {
-    awsParamStore.getParameter("davidshefcikcom-client-recaptcha-key", { region: "us-east-1" }).then(param => {
-      console.log(param);
-
-      this.captcha.current.execute().then(r => {
-        this.setState({
-          buttonText: "Please wait..."
-        });
-      }).catch(e => {
-        this.setState({
-          buttonText: "Try again."
-        });
+    console.log("env: " + process.env.RECAPTCHA_SITE_KEY);
+    this.captcha.current.execute().then(r => {
+      this.setState({
+        buttonText: "Please wait..."
       });
-    }).catch(error => {
-      console.log(error);
+    }).catch(e => {
       this.setState({
         buttonText: "Try again."
       });
