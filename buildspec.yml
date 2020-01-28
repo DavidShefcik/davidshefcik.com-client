@@ -1,11 +1,8 @@
 version: 0.2
 
-Type: AWS::CodeBuild::Project
-  Environment:
-    EnvironmentVariables: 
-    - Name: RECAPTCHA_SITE_KEY
-      Type: PARAMETER_STORE
-      Value: "davidshefcikcom-client-recaptcha-key"
+env:
+  parameter-store:
+    RECAPTCHA_SITE_KEY: "davidshefcikcom-client-recaptcha-key"
 
 phases:
   install:
