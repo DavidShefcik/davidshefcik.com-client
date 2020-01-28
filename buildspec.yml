@@ -28,5 +28,4 @@ artifacts:
     - "dist/**/*"
     - ".ebextensions/**/*"
     - "server/**/*"
-    - "package.json"
   discard-paths: no
