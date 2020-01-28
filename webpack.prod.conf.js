@@ -13,6 +13,7 @@ const VENDOR_LIBS = ["react", "redux", "react-redux", "react-dom", "redux-thunk"
 
 module.exports = {
   mode: "production",
+  target: "node",
   entry: {
     bundle: path.resolve(__dirname, "src") + "/index.js",
     vendor: VENDOR_LIBS
