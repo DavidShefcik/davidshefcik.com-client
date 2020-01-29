@@ -60,5 +60,6 @@
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.10.1",
     "express": "^4.17.1"
-  }
+  },
+  "proxy": "http://localhost:3000"
 }
