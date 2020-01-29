@@ -22,7 +22,10 @@ app.get("/*", (req, res) => {
   });
 });
 
+// Port
+const port = process.env.PORT || 3000;
+
 // Listen
-app.listen(8081, () => {
-  console.log("Server started!");
+app.listen(port, () => {
+  console.log(`Server started at port ${port}!`);
 });
