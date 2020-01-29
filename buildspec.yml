@@ -35,7 +35,7 @@ artifacts:
   files:
     - "dist/**/*"
     - ".ebextensions/**/*"
-    - "server/**/*"
+    - "app.js"
     - "node_modules/**/*"
     - "package.json"
   discard-paths: no
