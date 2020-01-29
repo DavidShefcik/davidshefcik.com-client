@@ -26,7 +26,7 @@ phases:
       - npm init -y
       - echo "Installing express"
       - npm install express
-      - npm install json
+      - sudo npm install -g json
       - json -I -f package.json -e 'this.scripts.start = "node app.js"'
       - echo "Done with installing. Moving on."
   post_build:
