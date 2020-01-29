@@ -2,30 +2,4 @@
 * Daivd Shefcik 2020
 */
 
-/* Imports */
-// Modules
-const express = require("express");
-const path = require("path");
-
-/* App */
-// Init.
-const app = express();
-
-// Static
-app.use(express.static(path.join(__dirname, "./dist")));
-
-// Catch all
-app.get("/*", (req, res) => {
-  // Return file
-  return res.sendFile(path.join(__dirname, "./dist/index.html"), (error) => {
-    return res.status(500).send("Something happened!");
-  });
-});
-
-// Port
-const port = process.env.PORT || 3000;
-
-// Listen
-app.listen(port, () => {
-  console.log(`Server started at port ${port}!`);
-});
+console.log("Started");
