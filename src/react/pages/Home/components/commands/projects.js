@@ -19,7 +19,7 @@ const projectsQuery = `
 /* Function */
 const run = async (args) => {
   return new Promise((resolve, reject) => {
-    request(process.env.NODE_ENV === "development" ? ("http://192.168.1.69/api/graphql") : ("https://davidshefcik.com/api/graphql"), projectsQuery).then(data => {
+    request(process.env.NODE_ENV === "development" ? ("http://192.168.1.69/api/graphql") : ("https://api.davidshefcik.com/graphql"), projectsQuery).then(data => {
       let output = "";
       let projects = data["projects"];
 

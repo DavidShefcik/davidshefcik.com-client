@@ -39,7 +39,7 @@ class ContactPage extends React.Component {
     });
   }
   verify = (response) => {
-    let apiURL = process.env.NODE_ENV === "development" ? ("http://192.168.1.69/api") : ("https://davidshefcik.com/api");
+    let apiURL = process.env.NODE_ENV === "development" ? ("http://192.168.1.69/api") : ("https://api.davidshefcik.com");
 
     axios.post(`${apiURL}/email`, {"captcha": response}).then(res => {
       let email = res["data"]["email"];

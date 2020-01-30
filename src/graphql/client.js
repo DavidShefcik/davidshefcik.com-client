@@ -8,7 +8,7 @@ import ApolloClient from "apollo-boost";
 
 /* Client */
 const client = new ApolloClient({
-  uri: process.env.NODE_ENV === "development" ? ("http://192.168.1.69/api/graphql") : ("https://davidshefcik.com/api/graphql")
+  uri: process.env.NODE_ENV === "development" ? ("http://192.168.1.69/api/graphql") : ("https://api.davidshefcik.com/graphql")
 });
 
 /* Export */
