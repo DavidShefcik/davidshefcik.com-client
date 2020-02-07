@@ -29,7 +29,7 @@ class Terminal extends React.Component {
     this.state = {
       output: [],
       links: Links.slice(1),
-      about: "My main skills are Node.js and deployment using Amazon Web Services, as I have AWS developer certification. I enjoy learning new things, creating tools that will help make things easier for others, and playing guitar! My resume is available",
+      about: "I am a full stack JavaScript website developer! I enjoy learning new things, creating tools that will help make things easier for others, and playing guitar! My resume is available",
       aboutLink: <Link to="/resume" title="Resume">here</Link>,
       screenWidth: window.innerWidth
     };
